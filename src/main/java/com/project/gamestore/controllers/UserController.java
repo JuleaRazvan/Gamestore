@@ -18,33 +18,33 @@ import com.project.gamestore.services.UserService;
 
 @RestController
 @RequestMapping("/users")
-public class UserController{
+public class UserController {
 
     @Autowired
     private UserService UserService;
-    
-    @GetMapping()
-    public List<UserDTO> findAll(){
+
+    @GetMapping
+    public List<UserDTO> findAll() {
         return UserService.findAll();
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO){
+    public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return UserService.createUser(userDTO);
     }
 
     @GetMapping("/{publicIdentifier}")
-    public UserDTO getByPublicIdentifier(@PathVariable UUID publicIdentifier){
+    public UserDTO getByPublicIdentifier(@PathVariable UUID publicIdentifier) {
         return UserService.getByPublicIdentifier(publicIdentifier);
     }
 
     @PutMapping("/{publicIdentifier}")
-    public UserDTO update(@RequestBody UserDTO userDTO, @PathVariable UUID publicIdentifier){
+    public UserDTO update(@RequestBody UserDTO userDTO, @PathVariable UUID publicIdentifier) {
         return UserService.update(userDTO, publicIdentifier);
     }
 
     @DeleteMapping("/{publicIdentifier}")
-    public void delete(@PathVariable UUID publicIdentifier){
+    public void delete(@PathVariable UUID publicIdentifier) {
         UserService.delete(publicIdentifier);
     }
 

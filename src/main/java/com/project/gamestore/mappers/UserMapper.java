@@ -6,10 +6,9 @@ import com.project.gamestore.dtos.UserDTO;
 import com.project.gamestore.entities.User;
 
 @Component
-public class UserMapper{
+public class UserMapper {
 
-    public UserDTO mapEntityToDTO(User user){
-       
+    public UserDTO mapEntityToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
@@ -18,11 +17,10 @@ public class UserMapper{
         userDTO.setCreatedAt(user.getCreatedAt());
         userDTO.setLastUpdatedAt(user.getLastUpdatedAt());
 
-        return userDTO; 
+        return userDTO;
     }
 
-    public User mapDtoToEntity(UserDTO userDTO){
-        
+    public User mapDtoToEntity(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());

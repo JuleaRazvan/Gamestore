@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.project.gamestore.entities.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, Long> {
     public Optional<User> findByPublicIdentifier(UUID publicIdentifier);
+
     public void deleteByPublicIdentifier(UUID publicIdentifier);
-   
+
 }

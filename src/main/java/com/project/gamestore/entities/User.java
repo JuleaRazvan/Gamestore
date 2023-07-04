@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "users")
-public class User extends IdentifiableEntity{
+public class User extends IdentifiableEntity {
     private String name;
     private String email;
     private String role;

@@ -36,7 +36,7 @@ public abstract class IdentifiableEntity {
 
     @PrePersist
     public void prePersist() {
-        if (publicIdentifier == null ){
+        if (publicIdentifier == null) {
             publicIdentifier = UUID.randomUUID();
         }
     }
