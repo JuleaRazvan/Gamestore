@@ -1,5 +1,8 @@
 package com.project.gamestore.controllers;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,41 +13,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.gamestore.dtos.UserDTO;
-
-import java.util.*;
-
-import com.project.gamestore.services.UserService;
+import com.project.gamestore.dtos.GenreDTO;
+import com.project.gamestore.services.GenreService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/genres")
+public class GenreController {
 
     @Autowired
-    private UserService UserService;
-
-    @GetMapping
-    public List<UserDTO> findAll() {
-        return UserService.findAll();
-    }
+    public GenreService genreService;
 
     @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        return UserService.createUser(userDTO);
+    public GenreDTO create(@RequestBody GenreDTO genderDTO) {
+        return genreService.createGenre(genderDTO);
+    }
+
+    @GetMapping
+    public List<GenreDTO> findAll() {
+        return genreService.findAll();
     }
 
     @GetMapping("/{publicIdentifier}")
-    public UserDTO getByPublicIdentifier(@PathVariable UUID publicIdentifier) {
-        return UserService.getByPublicIdentifier(publicIdentifier);
+    public GenreDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier) {
+        return genreService.getByPublicIdentifier(publicIdentifier);
     }
 
     @PutMapping("/{publicIdentifier}")
-    public UserDTO update(@RequestBody UserDTO userDTO, @PathVariable UUID publicIdentifier) {
-        return UserService.update(userDTO, publicIdentifier);
+    public GenreDTO update(@RequestBody GenreDTO genreDTO, @PathVariable UUID publicIdentifier) {
+        return genreService.update(genreDTO, publicIdentifier);
     }
 
     @DeleteMapping("/{publicIdentifier}")
     public void delete(@PathVariable UUID publicIdentifier) {
-        UserService.delete(publicIdentifier);
+        genreService.delete(publicIdentifier);
     }
 }
