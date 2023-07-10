@@ -32,10 +32,10 @@
    <changeSet id="gs-2.1" author="rjulea">
       <createTable tableName="genres">
          <column name="id" type="bigint" autoIncrement="true">
-            <constraints primaryKey="true" nullable="false" uniqueConstraintName="users_pk"/>
+            <constraints primaryKey="true" nullable="false" uniqueConstraintName="genres_pk"/>
          </column>
          <column name="public_identifier" type="${uuid.type}">
-            <constraints nullable="false" unique="true" uniqueConstraintName="genre_public_identifier_uk"/>
+            <constraints nullable="false" unique="true" uniqueConstraintName="genres_public_identifier_uk"/>
          </column>
          <column name="created_at" type="${timestamp.type}">
             <constraints nullable="false"/>
@@ -51,6 +51,35 @@
          </column>
          <column name="description" type="varchar(100)">
             <constraints nullable="false"/>
+         </column>
+      </createTable>
+   </changeSet>
+
+    <changeSet id="gs-3.1" author="rjulea">
+      <createTable tableName="publishers">
+         <column name="id" type="bigint" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false" uniqueConstraintName="publishers_pk"/>
+         </column>
+         <column name="public_identifier" type="${uuid.type}">
+            <constraints nullable="false" unique="true" uniqueConstraintName="publishers_public_identifier_uk"/>
+         </column>
+         <column name="created_at" type="${timestamp.type}">
+            <constraints nullable="false"/>
+         </column>
+         <column name="last_updated_at" type="${timestamp.type}">
+            <constraints nullable="false"/>
+         </column>   
+         <column name="name" type="varchar(50)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="email" type="varchar(50)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="image_url" type="varchar(400)">
+            <constraints nullable="true"/>
+         </column>
+         <column name="website" type="varchar(100)">
+            <constraints nullable="true"/>
          </column>
       </createTable>
    </changeSet>
