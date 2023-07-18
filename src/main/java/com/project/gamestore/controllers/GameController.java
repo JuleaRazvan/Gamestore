@@ -23,29 +23,29 @@ public class GameController {
 
     @Autowired
     public GameService gameService;
-    
+
     @PostMapping
-    public GameDTO create(@RequestBody GameApi gameApi){
+    public GameDTO create(@RequestBody GameApi gameApi) {
         return gameService.create(gameApi);
     }
 
     @GetMapping
-    public List<GameDTO> findAll(){
+    public List<GameDTO> findAll() {
         return gameService.findAll();
     }
 
     @GetMapping("/{publicIdentifier}")
-    public GameDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier){
+    public GameDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier) {
         return gameService.getByPublicIdentifier(publicIdentifier);
     }
 
     @PutMapping("/{publicIdentifier}")
-    public GameDTO update(@RequestBody GameApi gameApi, @PathVariable UUID publicIdentifier){
+    public GameDTO update(@RequestBody GameApi gameApi, @PathVariable UUID publicIdentifier) {
         return gameService.update(gameApi, publicIdentifier);
     }
 
     @DeleteMapping("/{publicIdentifier}")
-    public void delete(@PathVariable UUID publicIdentifier){
+    public void delete(@PathVariable UUID publicIdentifier) {
         gameService.delete(publicIdentifier);
     }
 }

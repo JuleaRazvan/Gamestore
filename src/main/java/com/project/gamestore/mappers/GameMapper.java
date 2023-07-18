@@ -26,12 +26,11 @@ public class GameMapper {
     @Autowired
     private PublisherRepository publisherRepository;
 
-
     public GameDTO mapEntityToDTO(Game game) {
         GameDTO gameDTO = new GameDTO();
         gameDTO.setPublicIdentifier(game.getPublicIdentifier());
         gameDTO.setName(game.getName());
-        if(game.getPrice().compareTo(new BigDecimal(0)) == 0){
+        if (game.getPrice().compareTo(new BigDecimal(0)) == 0) {
             gameDTO.setPrice("FREE");
         } else {
             gameDTO.setPrice(game.getPrice().toString());
@@ -47,14 +46,14 @@ public class GameMapper {
     public Game mapApiToEntity(GameApi gameApi) {
         Game game = new Game();
         game.setName(gameApi.getName());
-        if(gameApi.getPrice().equals("FREE")){
+        if (gameApi.getPrice().equals("FREE")) {
             game.setPrice(new BigDecimal(0));
-        } else{
+        } else {
             game.setPrice(new BigDecimal(gameApi.getPrice()));
         }
         Genre genre = genreRepository.findByPublicIdentifier(gameApi.getGenreId()).orElseThrow();
         game.setGenre(genre);
-        
+
         Publisher publisher = publisherRepository.findByPublicIdentifier(gameApi.getPublisherId()).orElseThrow();
         game.setPublisher(publisher);
 

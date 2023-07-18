@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "games")
-public class Game  extends IdentifiableEntity{
+public class Game extends IdentifiableEntity {
     private String name;
     private BigDecimal price;
 
