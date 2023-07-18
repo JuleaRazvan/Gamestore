@@ -16,11 +16,11 @@ public class Game extends IdentifiableEntity {
     private String name;
     private BigDecimal price;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 }
