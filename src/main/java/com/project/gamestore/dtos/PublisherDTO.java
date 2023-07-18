@@ -9,12 +9,12 @@ import lombok.Setter;
 @Setter
 @Getter
 public class PublisherDTO {
-    public UUID publicIdentifier;
+    private UUID publicIdentifier;
     private String name;
     private String email;
     private String imageUrl;
     private String website;
-    public Instant createdAt;
-    public Instant lastUpdatedAt;
+    private Instant createdAt;
+    private Instant lastUpdatedAt;
 
 }

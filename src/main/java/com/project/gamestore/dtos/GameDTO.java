@@ -1,19 +1,17 @@
 package com.project.gamestore.dtos;
-
 import java.time.Instant;
 import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class GenreDTO {
+@Setter
+public class GameDTO {
     private UUID publicIdentifier;
     private String name;
-    private Integer popularity;
-    private String description;
+    private String price;
+    private GenreDTO genre;
+    private PublisherDTO publisher;
     private Instant createdAt;
     private Instant lastUpdatedAt;
-
 }
