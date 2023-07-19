@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "reviews")
-public class Review extends IdentifiableEntity{
+public class Review extends IdentifiableEntity {
     private Integer rating;
     private String comment;
 

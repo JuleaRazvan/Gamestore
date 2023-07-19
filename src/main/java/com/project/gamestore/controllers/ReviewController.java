@@ -20,32 +20,32 @@ import com.project.gamestore.services.ReviewService;
 @RestController
 @RequestMapping("/reviews")
 public class ReviewController {
-    
+
     @Autowired
-    public ReviewService reviewService;
+    private ReviewService reviewService;
 
     @PostMapping
-    public ReviewDTO create(@RequestBody ReviewApi reviewApi){
+    public ReviewDTO create(@RequestBody ReviewApi reviewApi) {
         return reviewService.createReview(reviewApi);
     }
 
     @GetMapping
-    public List<ReviewDTO> findAll(){
+    public List<ReviewDTO> findAll() {
         return reviewService.findAll();
     }
 
     @GetMapping("/{publicIdentifier}")
-    public ReviewDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier){
+    public ReviewDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier) {
         return reviewService.getByPublicIdentifier(publicIdentifier);
     }
 
     @PutMapping("/{publicIdentifier}")
-    public ReviewDTO update(@RequestBody ReviewApi reviewApi, @PathVariable UUID publicIdentifier){
+    public ReviewDTO update(@RequestBody ReviewApi reviewApi, @PathVariable UUID publicIdentifier) {
         return reviewService.update(reviewApi, publicIdentifier);
     }
 
     @DeleteMapping("/{publicIdentifier}")
-    public void delete(@PathVariable UUID publicIdentifier){
+    public void delete(@PathVariable UUID publicIdentifier) {
         reviewService.delte(publicIdentifier);
     }
 }

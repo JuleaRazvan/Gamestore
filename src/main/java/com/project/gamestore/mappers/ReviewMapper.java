@@ -15,16 +15,10 @@ import com.project.gamestore.repositories.UserRepository;
 public class ReviewMapper {
 
     @Autowired
-    public UserMapper userMapper;
+    private GameRepository gameRepository;
 
     @Autowired
-    public GameMapper gameMapper;
-
-    @Autowired
-    public GameRepository gameRepository;
-
-    @Autowired
-    public UserRepository userRepository;
+    private UserRepository userRepository;
 
     public ReviewDTO mapEntityToDTO(Review review) {
         ReviewDTO reviewDTO = new ReviewDTO();

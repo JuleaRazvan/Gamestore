@@ -19,16 +19,16 @@ import jakarta.transaction.Transactional;
 public class ReviewService {
 
     @Autowired
-    public ReviewMapper reviewMapper;
+    private ReviewMapper reviewMapper;
 
     @Autowired
-    public ReviewRepository reviewRepository;
+    private ReviewRepository reviewRepository;
 
     @Autowired
-    public UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public GameRepository gameRepository;
+    private GameRepository gameRepository;
 
     public ReviewDTO createReview(ReviewApi reviewApi) {
         Review review = reviewMapper.mapApiToEntity(reviewApi);
