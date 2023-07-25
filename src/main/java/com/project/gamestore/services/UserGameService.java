@@ -57,6 +57,7 @@ public class UserGameService {
 
         Game game = gameRepository.findByPublicIdentifier(userGameDTO.getGameId()).orElseThrow();
         updatUserGame.setGame(game);
+        
         updatUserGame = userGameRepository.save(updatUserGame);
 
         return userGameMapper.mapEntityToDTO(updatUserGame);
