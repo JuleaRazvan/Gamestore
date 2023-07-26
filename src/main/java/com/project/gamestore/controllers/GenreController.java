@@ -21,7 +21,7 @@ import com.project.gamestore.services.GenreService;
 public class GenreController {
 
     @Autowired
-    public GenreService genreService;
+    private GenreService genreService;
 
     @PostMapping
     public GenreDTO create(@RequestBody GenreDTO genderDTO) {

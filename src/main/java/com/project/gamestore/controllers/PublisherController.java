@@ -21,7 +21,7 @@ import com.project.gamestore.services.PublisherService;
 public class PublisherController {
 
     @Autowired
-    public PublisherService publisherService;
+    private PublisherService publisherService;
 
     @PostMapping
     public PublisherDTO create(@RequestBody PublisherDTO publisherDTO) {

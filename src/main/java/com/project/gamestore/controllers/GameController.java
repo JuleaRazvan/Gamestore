@@ -22,7 +22,7 @@ import com.project.gamestore.services.GameService;
 public class GameController {
 
     @Autowired
-    public GameService gameService;
+    private GameService gameService;
 
     @PostMapping
     public GameDTO create(@RequestBody GameApi gameApi) {

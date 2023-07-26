@@ -27,36 +27,26 @@ public class GameMapper {
     private PublisherRepository publisherRepository;
 
     public GameDTO mapEntityToDTO(Game game) {
-        GameDTO gameDTO = new GameDTO();
-        gameDTO.setPublicIdentifier(game.getPublicIdentifier());
-        gameDTO.setName(game.getName());
-        if (game.getPrice().compareTo(new BigDecimal(0)) == 0) {
-            gameDTO.setPrice("FREE");
-        } else {
-            gameDTO.setPrice(game.getPrice().toString());
-        }
-        gameDTO.setGenre(genreMapper.mapEntityToDTO(game.getGenre()));
-        gameDTO.setPublisher(publisherMapper.mapEntityToDTO(game.getPublisher()));
-        gameDTO.setCreatedAt(game.getCreatedAt());
-        gameDTO.setLastUpdatedAt(game.getLastUpdatedAt());
-
-        return gameDTO;
+        return GameDTO.builder()
+                .publicIdentifier(game.getPublicIdentifier())
+                .name(game.getName())
+                .price(game.getPrice().compareTo(new BigDecimal(0)) == 0 ? "FREE" : game.getPrice().toString())
+                .genre(genreMapper.mapEntityToDTO(game.getGenre()))
+                .publisher(publisherMapper.mapEntityToDTO(game.getPublisher()))
+                .createdAt(game.getCreatedAt())
+                .lastUpdatedAt(game.getLastUpdatedAt())
+                .build();
     }
 
     public Game mapApiToEntity(GameApi gameApi) {
-        Game game = new Game();
-        game.setName(gameApi.getName());
-        if (gameApi.getPrice().equals("FREE")) {
-            game.setPrice(new BigDecimal(0));
-        } else {
-            game.setPrice(new BigDecimal(gameApi.getPrice()));
-        }
         Genre genre = genreRepository.findByPublicIdentifier(gameApi.getGenreId()).orElseThrow();
-        game.setGenre(genre);
-
         Publisher publisher = publisherRepository.findByPublicIdentifier(gameApi.getPublisherId()).orElseThrow();
-        game.setPublisher(publisher);
 
-        return game;
+        return Game.builder()
+                .name(gameApi.getName())
+                .price(gameApi.getPrice().equals("FREE") ? new BigDecimal(0) : new BigDecimal(gameApi.getPrice()))
+                .genre(genre)
+                .publisher(publisher)
+                .build();
     }
 }

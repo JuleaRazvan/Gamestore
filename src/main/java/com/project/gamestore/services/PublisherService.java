@@ -17,10 +17,10 @@ import jakarta.transaction.Transactional;
 public class PublisherService {
 
     @Autowired
-    public PublisherMapper publisherMapper;
+    private PublisherMapper publisherMapper;
 
     @Autowired
-    public PublisherRepository publisherRepository;
+    private PublisherRepository publisherRepository;
 
     public PublisherDTO createPublisher(PublisherDTO publisherDTO) {
         Publisher publisher = publisherMapper.mapDtoToEntity(publisherDTO);
