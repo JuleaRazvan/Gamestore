@@ -21,8 +21,8 @@ public class UserGameMapper {
     public UserGameDTO mapEntityToDTO(UserGame userGame) {
         return UserGameDTO.builder()
         .publicIdentifier(userGame.getPublicIdentifier())
-        .userId(userGame.getPublicIdentifier())
-        .gameId(userGame.getPublicIdentifier())
+        .userId(userGame.getUser().getPublicIdentifier())
+        .gameId(userGame.getGame().getPublicIdentifier())
         .createdAt(userGame.getCreatedAt())
         .lastUpdatedAt(userGame.getLastUpdatedAt())
         .build();
