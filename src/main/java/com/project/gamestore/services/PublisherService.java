@@ -35,7 +35,7 @@ public class PublisherService {
     }
 
     public PublisherDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Publisher foundPublisher = publisherRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Publisher foundPublisher = publisherRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return publisherMapper.mapEntityToDTO(foundPublisher);
     }
 

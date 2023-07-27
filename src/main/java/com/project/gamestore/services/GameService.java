@@ -46,7 +46,7 @@ public class GameService {
     }
 
     public GameDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Game foundGame = gameRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Game foundGame = gameRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return gameMapper.mapEntityToDTO(foundGame);
     }
 

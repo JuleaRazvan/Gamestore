@@ -34,7 +34,7 @@ public class GenreService {
     }
 
     public GenreDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Genre foundGenre = genreRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Genre foundGenre = genreRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return genreMapper.mapEntityToDTO(foundGenre);
     }
 

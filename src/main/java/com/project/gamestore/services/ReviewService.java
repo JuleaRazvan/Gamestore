@@ -43,7 +43,7 @@ public class ReviewService {
     }
 
     public ReviewDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Review foundReview = reviewRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Review foundReview = reviewRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return reviewMapper.mapEntityToDTO(foundReview);
     }
 

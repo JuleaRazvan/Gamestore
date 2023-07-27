@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public UserDTO getByPublicIdentifier(UUID publicIdentifier) {
-        User foundUser = userRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        User foundUser = userRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return userMapper.mapEntityToDTO(foundUser);
     }
 
