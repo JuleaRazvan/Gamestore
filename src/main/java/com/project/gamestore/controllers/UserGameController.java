@@ -2,8 +2,6 @@ package com.project.gamestore.controllers;
 
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.gamestore.dtos.UserGameDTO;
 import com.project.gamestore.services.UserGameService;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping("/userGame")
+@AllArgsConstructor
 public class UserGameController {
 
-    @Autowired
     private UserGameService userGameService;
 
     @PostMapping

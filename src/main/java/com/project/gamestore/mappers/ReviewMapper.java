@@ -1,8 +1,6 @@
 package com.project.gamestore.mappers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.project.gamestore.dtos.ReviewApi;
 import com.project.gamestore.dtos.ReviewDTO;
 import com.project.gamestore.entities.Game;
@@ -10,14 +8,14 @@ import com.project.gamestore.entities.Review;
 import com.project.gamestore.entities.User;
 import com.project.gamestore.repositories.GameRepository;
 import com.project.gamestore.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 
 @Component
+@AllArgsConstructor
 public class ReviewMapper {
 
-    @Autowired
     private GameRepository gameRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
     public ReviewDTO mapEntityToDTO(Review review) {

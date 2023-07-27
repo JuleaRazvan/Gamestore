@@ -3,9 +3,7 @@ package com.project.gamestore.services;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.gamestore.dtos.GameApi;
 import com.project.gamestore.dtos.GameDTO;
 import com.project.gamestore.entities.Game;
@@ -15,22 +13,19 @@ import com.project.gamestore.mappers.GameMapper;
 import com.project.gamestore.repositories.GameRepository;
 import com.project.gamestore.repositories.GenreRepository;
 import com.project.gamestore.repositories.PublisherRepository;
-
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class GameService {
 
-    @Autowired
     private GameRepository gameRepository;
-
-    @Autowired
+    
     private GameMapper gameMapper;
-
-    @Autowired
+    
     private GenreRepository genreRepository;
 
-    @Autowired
     private PublisherRepository publisherRepository;
 
     public GameDTO create(GameApi gameApi) {

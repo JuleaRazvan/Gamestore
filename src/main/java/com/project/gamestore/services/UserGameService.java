@@ -2,10 +2,7 @@ package com.project.gamestore.services;
 
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.gamestore.dtos.UserGameDTO;
 import com.project.gamestore.entities.Game;
 import com.project.gamestore.entities.User;
@@ -14,22 +11,19 @@ import com.project.gamestore.mappers.UserGameMapper;
 import com.project.gamestore.repositories.GameRepository;
 import com.project.gamestore.repositories.UserGameRepository;
 import com.project.gamestore.repositories.UserRepository;
-
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class UserGameService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private GameRepository gameRepository;
 
-    @Autowired
     private UserGameRepository userGameRepository;
 
-    @Autowired
     private UserGameMapper userGameMapper;
 
     public UserGameDTO create(UserGameDTO userGameDTO) {

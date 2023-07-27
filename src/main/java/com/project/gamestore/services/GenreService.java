@@ -2,23 +2,20 @@ package com.project.gamestore.services;
 
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.gamestore.dtos.GenreDTO;
 import com.project.gamestore.entities.Genre;
 import com.project.gamestore.mappers.GenreMapper;
 import com.project.gamestore.repositories.GenreRepository;
-
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class GenreService {
 
-    @Autowired
     private GenreRepository genreRepository;
 
-    @Autowired
     private GenreMapper genreMapper;
 
     public GenreDTO createGenre(GenreDTO genreDTO) {
