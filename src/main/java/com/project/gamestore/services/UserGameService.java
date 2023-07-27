@@ -45,19 +45,19 @@ public class UserGameService {
     }
 
     public UserGameDTO getByPublicIdentifier(UUID publicIdentifier) {
-        UserGame founUserGame = userGameRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        UserGame founUserGame = userGameRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return userGameMapper.mapEntityToDTO(founUserGame);
     }
 
     public UserGameDTO update(UserGameDTO userGameDTO, UUID publicIdentifier) {
-        UserGame updatUserGame = userGameRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        UserGame updatUserGame = userGameRepository.findByPublicIdentifierMandatory(publicIdentifier);
 
-        User user = userRepository.findByPublicIdentifier(userGameDTO.getUserId()).orElseThrow();
+        User user = userRepository.findByPublicIdentifierMandatory(userGameDTO.getUserId());
         updatUserGame.setUser(user);
 
-        Game game = gameRepository.findByPublicIdentifier(userGameDTO.getGameId()).orElseThrow();
+        Game game = gameRepository.findByPublicIdentifierMandatory(userGameDTO.getGameId());
         updatUserGame.setGame(game);
-        
+
         updatUserGame = userGameRepository.save(updatUserGame);
 
         return userGameMapper.mapEntityToDTO(updatUserGame);

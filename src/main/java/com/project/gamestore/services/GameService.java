@@ -46,22 +46,22 @@ public class GameService {
     }
 
     public GameDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Game foundGame = gameRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Game foundGame = gameRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return gameMapper.mapEntityToDTO(foundGame);
     }
 
     public GameDTO update(GameApi gameApi, UUID publicIdentifier) {
-        Game updateGame = gameRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Game updateGame = gameRepository.findByPublicIdentifierMandatory(publicIdentifier);
         updateGame.setName(gameApi.getName());
         if (gameApi.getPrice().equals("FREE")) {
             updateGame.setPrice(new BigDecimal(0));
         } else {
             updateGame.setPrice(new BigDecimal(gameApi.getPrice()));
         }
-        Genre genre = genreRepository.findByPublicIdentifier(gameApi.getGenreId()).orElseThrow();
+        Genre genre = genreRepository.findByPublicIdentifierMandatory(gameApi.getGenreId());
         updateGame.setGenre(genre);
 
-        Publisher publisher = publisherRepository.findByPublicIdentifier(gameApi.getPublisherId()).orElseThrow();
+        Publisher publisher = publisherRepository.findByPublicIdentifierMandatory(gameApi.getPublisherId());
         updateGame.setPublisher(publisher);
         updateGame = gameRepository.save(updateGame);
 

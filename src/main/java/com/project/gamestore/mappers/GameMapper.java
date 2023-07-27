@@ -39,8 +39,8 @@ public class GameMapper {
     }
 
     public Game mapApiToEntity(GameApi gameApi) {
-        Genre genre = genreRepository.findByPublicIdentifier(gameApi.getGenreId()).orElseThrow();
-        Publisher publisher = publisherRepository.findByPublicIdentifier(gameApi.getPublisherId()).orElseThrow();
+        Genre genre = genreRepository.findByPublicIdentifierMandatory(gameApi.getGenreId());
+        Publisher publisher = publisherRepository.findByPublicIdentifierMandatory(gameApi.getPublisherId());
 
         return Game.builder()
                 .name(gameApi.getName())

@@ -33,8 +33,8 @@ public class ReviewMapper {
     }
 
     public Review mapApiToEntity(ReviewApi reviewApi) {
-        User user = userRepository.findByPublicIdentifier(reviewApi.getUserId()).orElseThrow();
-        Game game = gameRepository.findByPublicIdentifier(reviewApi.getGameId()).orElseThrow();
+        User user = userRepository.findByPublicIdentifierMandatory(reviewApi.getUserId());
+        Game game = gameRepository.findByPublicIdentifierMandatory(reviewApi.getGameId());
 
         return Review.builder()
                 .rating(reviewApi.getRating())

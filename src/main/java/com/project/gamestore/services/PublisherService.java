@@ -35,12 +35,12 @@ public class PublisherService {
     }
 
     public PublisherDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Publisher foundPublisher = publisherRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Publisher foundPublisher = publisherRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return publisherMapper.mapEntityToDTO(foundPublisher);
     }
 
     public PublisherDTO update(PublisherDTO publisherUpdate, UUID publicIdentifier) {
-        Publisher publisher = publisherRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Publisher publisher = publisherRepository.findByPublicIdentifierMandatory(publicIdentifier);
         publisher.setName(publisherUpdate.getName());
         publisher.setEmail(publisherUpdate.getEmail());
         publisher.setImageUrl(publisherUpdate.getImageUrl());

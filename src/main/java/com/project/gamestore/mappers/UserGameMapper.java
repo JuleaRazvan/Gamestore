@@ -29,8 +29,8 @@ public class UserGameMapper {
     }
 
     public UserGame mapDtoToEntity(UserGameDTO userGameDTO) {
-        User user = userRepository.findByPublicIdentifier(userGameDTO.getUserId()).orElseThrow();
-        Game game = gameRepository.findByPublicIdentifier(userGameDTO.getGameId()).orElseThrow();
+        User user = userRepository.findByPublicIdentifierMandatory(userGameDTO.getUserId());
+        Game game = gameRepository.findByPublicIdentifierMandatory(userGameDTO.getGameId());
 
         return UserGame.builder()
         .user(user)

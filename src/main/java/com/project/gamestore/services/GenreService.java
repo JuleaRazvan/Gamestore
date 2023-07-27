@@ -34,12 +34,12 @@ public class GenreService {
     }
 
     public GenreDTO getByPublicIdentifier(UUID publicIdentifier) {
-        Genre foundGenre = genreRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Genre foundGenre = genreRepository.findByPublicIdentifierMandatory(publicIdentifier);
         return genreMapper.mapEntityToDTO(foundGenre);
     }
 
     public GenreDTO update(GenreDTO genreDTO, UUID publicIdentifier) {
-        Genre updateGenre = genreRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Genre updateGenre = genreRepository.findByPublicIdentifierMandatory(publicIdentifier);
         updateGenre.setName(genreDTO.getName());
         updateGenre.setPopularity(genreDTO.getPopularity());
         updateGenre.setDescription(genreDTO.getDescription());
