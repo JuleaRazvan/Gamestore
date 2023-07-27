@@ -16,10 +16,10 @@ import jakarta.transaction.Transactional;
 public class GenreService {
 
     @Autowired
-    public GenreRepository genreRepository;
+    private GenreRepository genreRepository;
 
     @Autowired
-    public GenreMapper genreMapper;
+    private GenreMapper genreMapper;
 
     public GenreDTO createGenre(GenreDTO genreDTO) {
         Genre genre = genreMapper.mapDtoToEntity(genreDTO);

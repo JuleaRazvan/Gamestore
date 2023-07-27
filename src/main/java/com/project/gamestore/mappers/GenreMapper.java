@@ -9,28 +9,21 @@ import com.project.gamestore.entities.Genre;
 public class GenreMapper {
 
     public GenreDTO mapEntityToDTO(Genre genre) {
-        GenreDTO genreDTO = new GenreDTO();
-        genreDTO.setPublicIdentifier(genre.getPublicIdentifier());
-        genreDTO.setName(genre.getName());
-        genreDTO.setPopularity(genre.getPopularity());
-        genreDTO.setDescription(genre.getDescription());
-        genreDTO.setCreatedAt(genre.getCreatedAt());
-        genreDTO.setLastUpdatedAt(genre.getLastUpdatedAt());
-
-        return genreDTO;
+        return GenreDTO.builder()
+                .publicIdentifier(genre.getPublicIdentifier())
+                .name(genre.getName())
+                .popularity(genre.getPopularity())
+                .description(genre.getDescription())
+                .createdAt(genre.getCreatedAt())
+                .lastUpdatedAt(genre.getLastUpdatedAt())
+                .build();
     }
 
     public Genre mapDtoToEntity(GenreDTO genreDTO) {
-        Genre genre = new Genre();
-        genre.setPublicIdentifier(genreDTO.getPublicIdentifier());
-        genre.setName(genreDTO.getName());
-        genre.setPopularity(genreDTO.getPopularity());
-        genre.setDescription(genreDTO.getDescription());
-        genre.setCreatedAt(genreDTO.getCreatedAt());
-        genre.setLastUpdatedAt(genreDTO.getLastUpdatedAt());
-
-        return genre;
-
+        return Genre.builder()
+                .name(genreDTO.getName())
+                .popularity(genreDTO.getPopularity())
+                .description(genreDTO.getDescription())
+                .build();
     }
-
 }

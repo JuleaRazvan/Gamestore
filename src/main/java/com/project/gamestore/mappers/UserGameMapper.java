@@ -19,26 +19,22 @@ public class UserGameMapper {
     private UserRepository userRepository;
 
     public UserGameDTO mapEntityToDTO(UserGame userGame) {
-        UserGameDTO userGameDTO = new UserGameDTO();
-        userGameDTO.setPublicIdentifier(userGame.getPublicIdentifier());
-        userGameDTO.setUserId(userGame.getUser().getPublicIdentifier());
-        userGameDTO.setGameId(userGame.getGame().getPublicIdentifier());
-        userGameDTO.setCreatedAt(userGame.getCreatedAt());
-        userGameDTO.setLastUpdatedAt(userGame.getLastUpdatedAt());
-
-        return userGameDTO;
+        return UserGameDTO.builder()
+        .publicIdentifier(userGame.getPublicIdentifier())
+        .userId(userGame.getUser().getPublicIdentifier())
+        .gameId(userGame.getGame().getPublicIdentifier())
+        .createdAt(userGame.getCreatedAt())
+        .lastUpdatedAt(userGame.getLastUpdatedAt())
+        .build();
     }
 
     public UserGame mapDtoToEntity(UserGameDTO userGameDTO) {
-        UserGame userGame = new UserGame();
-        userGame.setPublicIdentifier(userGameDTO.getPublicIdentifier());
-
         User user = userRepository.findByPublicIdentifier(userGameDTO.getUserId()).orElseThrow();
-        userGame.setUser(user);
-
         Game game = gameRepository.findByPublicIdentifier(userGameDTO.getGameId()).orElseThrow();
-        userGame.setGame(game);
 
-        return userGame;
+        return UserGame.builder()
+        .user(user)
+        .game(game)
+        .build();
     }
 }

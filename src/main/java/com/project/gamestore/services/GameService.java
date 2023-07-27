@@ -22,10 +22,10 @@ import jakarta.transaction.Transactional;
 public class GameService {
 
     @Autowired
-    public GameRepository gameRepository;
+    private GameRepository gameRepository;
 
     @Autowired
-    public GameMapper gameMapper;
+    private GameMapper gameMapper;
 
     @Autowired
     private GenreRepository genreRepository;

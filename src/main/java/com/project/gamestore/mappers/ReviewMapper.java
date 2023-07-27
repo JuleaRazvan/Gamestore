@@ -21,30 +21,26 @@ public class ReviewMapper {
     private UserRepository userRepository;
 
     public ReviewDTO mapEntityToDTO(Review review) {
-        ReviewDTO reviewDTO = new ReviewDTO();
-        reviewDTO.setPublicIdentifier(review.getPublicIdentifier());
-        reviewDTO.setRating(review.getRating());
-        reviewDTO.setComment(review.getComment());
-        reviewDTO.setUserId(review.getUser().getPublicIdentifier());
-        reviewDTO.setGameId(review.getGame().getPublicIdentifier());
-        reviewDTO.setCreatedAt(review.getCreatedAt());
-        reviewDTO.setLastUpdatedAt(review.getLastUpdatedAt());
-
-        return reviewDTO;
+        return ReviewDTO.builder()
+                .publicIdentifier(review.getPublicIdentifier())
+                .rating(review.getRating())
+                .comment(review.getComment())
+                .userId(review.getPublicIdentifier())
+                .gameId(review.getPublicIdentifier())
+                .createdAt(review.getCreatedAt())
+                .lastUpdatedAt(review.getLastUpdatedAt())
+                .build();
     }
 
     public Review mapApiToEntity(ReviewApi reviewApi) {
-        Review review = new Review();
-        review.setRating(reviewApi.getRating());
-        review.setComment(reviewApi.getComment());
-
         User user = userRepository.findByPublicIdentifier(reviewApi.getUserId()).orElseThrow();
-        review.setUser(user);
-
         Game game = gameRepository.findByPublicIdentifier(reviewApi.getGameId()).orElseThrow();
-        review.setGame(game);
 
-        return review;
+        return Review.builder()
+                .rating(reviewApi.getRating())
+                .comment(reviewApi.getComment())
+                .user(user)
+                .game(game)
+                .build();
     }
-
 }
