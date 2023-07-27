@@ -39,7 +39,7 @@ public class GenreService {
     }
 
     public GenreDTO update(GenreDTO genreDTO, UUID publicIdentifier) {
-        Genre updateGenre = genreRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Genre updateGenre = genreRepository.findByPublicIdentifierMandatory(publicIdentifier);
         updateGenre.setName(genreDTO.getName());
         updateGenre.setPopularity(genreDTO.getPopularity());
         updateGenre.setDescription(genreDTO.getDescription());

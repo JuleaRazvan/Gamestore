@@ -48,14 +48,14 @@ public class ReviewService {
     }
 
     public ReviewDTO update(ReviewApi reviewApi, UUID publicIdentifier) {
-        Review updateReview = reviewRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        Review updateReview = reviewRepository.findByPublicIdentifierMandatory(publicIdentifier);
         updateReview.setRating(reviewApi.getRating());
         updateReview.setComment(reviewApi.getComment());
 
-        User user = userRepository.findByPublicIdentifier(reviewApi.getUserId()).orElseThrow();
+        User user = userRepository.findByPublicIdentifierMandatory(reviewApi.getUserId());
         updateReview.setUser(user);
 
-        Game game = gameRepository.findByPublicIdentifier(reviewApi.getGameId()).orElseThrow();
+        Game game = gameRepository.findByPublicIdentifierMandatory(reviewApi.getGameId());
         updateReview.setGame(game);
         updateReview = reviewRepository.save(updateReview);
 

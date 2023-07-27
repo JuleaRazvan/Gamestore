@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public UserDTO update(UserDTO userUpdate, UUID publicIdentifier) {
-        User user = userRepository.findByPublicIdentifier(publicIdentifier).orElseThrow();
+        User user = userRepository.findByPublicIdentifierMandatory(publicIdentifier);
         user.setName(userUpdate.getName());
         user.setEmail(userUpdate.getEmail());
         user.setRole(userUpdate.getRole());
