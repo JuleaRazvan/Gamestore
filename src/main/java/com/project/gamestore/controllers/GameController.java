@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.project.gamestore.dtos.GameApi;
 import com.project.gamestore.dtos.GameDTO;
+import com.project.gamestore.dtos.UserGameDTO;
 import com.project.gamestore.routes.Routes;
 import com.project.gamestore.services.GameService;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,16 @@ public class GameController {
     @PostMapping(Routes.GAMES_ROOT)
     public GameDTO create(@RequestBody GameApi gameApi) {
         return gameService.create(gameApi);
+    }
+
+    @PostMapping(Routes.GAMES_BUY)
+    public UserGameDTO buyGame(@PathVariable UUID publicIdentifier,@PathVariable UUID userIdentifier){
+        return gameService.buyGame(publicIdentifier, userIdentifier);
+    }
+
+    @PostMapping(Routes.GAMES_REFUND)
+    public void refundGame(@PathVariable UUID publicIdentifier,@PathVariable UUID userIdentifier){
+        gameService.refundGame(publicIdentifier, userIdentifier);
     }
 
     @GetMapping(Routes.GAMES_ROOT)
