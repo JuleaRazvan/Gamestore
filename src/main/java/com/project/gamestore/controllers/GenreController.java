@@ -8,40 +8,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.project.gamestore.dtos.GenreDTO;
+import com.project.gamestore.routes.Routes;
 import com.project.gamestore.services.GenreService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/genres")
 @AllArgsConstructor
 public class GenreController {
 
     private GenreService genreService;
 
-    @PostMapping
+    @PostMapping(Routes.GENRES_ROOT)
     public GenreDTO create(@RequestBody GenreDTO genderDTO) {
         return genreService.createGenre(genderDTO);
     }
 
-    @GetMapping
+    @GetMapping(Routes.GENRES_ROOT)
     public List<GenreDTO> findAll() {
         return genreService.findAll();
     }
 
-    @GetMapping("/{publicIdentifier}")
+    @GetMapping(Routes.GENRES_ENTRY)
     public GenreDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier) {
         return genreService.getByPublicIdentifier(publicIdentifier);
     }
 
-    @PutMapping("/{publicIdentifier}")
+    @PutMapping(Routes.GENRES_ENTRY)
     public GenreDTO update(@RequestBody GenreDTO genreDTO, @PathVariable UUID publicIdentifier) {
         return genreService.update(genreDTO, publicIdentifier);
     }
 
-    @DeleteMapping("/{publicIdentifier}")
+    @DeleteMapping(Routes.GENRES_ENTRY)
     public void delete(@PathVariable UUID publicIdentifier) {
         genreService.delete(publicIdentifier);
     }
