@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.project.gamestore.dtos.GameDTO;
 import com.project.gamestore.dtos.UserDTO;
 import com.project.gamestore.routes.Routes;
 
@@ -18,30 +20,35 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserController {
 
-    private UserService UserService;
+    private UserService userService;
 
     @GetMapping(Routes.USERS_ROOT)
     public List<UserDTO> findAll() {
-        return UserService.findAll();
+        return userService.findAll();
     }
 
     @PostMapping(Routes.USERS_ROOT)
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        return UserService.createUser(userDTO);
+        return userService.createUser(userDTO);
     }
 
     @GetMapping(Routes.USERS_ENTRY)
     public UserDTO getByPublicIdentifier(@PathVariable UUID publicIdentifier) {
-        return UserService.getByPublicIdentifier(publicIdentifier);
+        return userService.getByPublicIdentifier(publicIdentifier);
+    }
+
+    @GetMapping(Routes.USERS_ENTRY_GAMES)
+    public List<GameDTO> getAllGamesByUserOwner(@PathVariable UUID publicIdentifier){
+        return userService.getAllGamesByUserOwner(publicIdentifier);
     }
 
     @PutMapping(Routes.USERS_ENTRY)
     public UserDTO update(@RequestBody UserDTO userDTO, @PathVariable UUID publicIdentifier) {
-        return UserService.update(userDTO, publicIdentifier);
+        return userService.update(userDTO, publicIdentifier);
     }
 
     @DeleteMapping(Routes.USERS_ENTRY)
     public void delete(@PathVariable UUID publicIdentifier) {
-        UserService.delete(publicIdentifier);
+        userService.delete(publicIdentifier);
     }
 }
