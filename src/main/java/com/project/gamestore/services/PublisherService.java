@@ -2,24 +2,20 @@ package com.project.gamestore.services;
 
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.gamestore.dtos.PublisherDTO;
 import com.project.gamestore.entities.Publisher;
 import com.project.gamestore.mappers.PublisherMapper;
 import com.project.gamestore.repositories.PublisherRepository;
-
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class PublisherService {
-
-    @Autowired
+    
     private PublisherMapper publisherMapper;
 
-    @Autowired
     private PublisherRepository publisherRepository;
 
     public PublisherDTO createPublisher(PublisherDTO publisherDTO) {

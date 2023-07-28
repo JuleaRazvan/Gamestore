@@ -1,7 +1,6 @@
 package com.project.gamestore.mappers;
 
 import org.springframework.stereotype.Component;
-
 import com.project.gamestore.dtos.GenreDTO;
 import com.project.gamestore.entities.Genre;
 

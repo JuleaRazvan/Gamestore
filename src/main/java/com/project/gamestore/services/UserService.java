@@ -1,24 +1,20 @@
 package com.project.gamestore.services;
 
 import java.util.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.gamestore.dtos.UserDTO;
 import com.project.gamestore.entities.User;
 import com.project.gamestore.mappers.UserMapper;
 import com.project.gamestore.repositories.UserRepository;
-
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private UserMapper userMapper;
 
     public UserDTO createUser(UserDTO userDTO) {

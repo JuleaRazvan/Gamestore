@@ -1,6 +1,5 @@
 package com.project.gamestore.mappers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.project.gamestore.dtos.UserGameDTO;
 import com.project.gamestore.entities.Game;
@@ -9,13 +8,14 @@ import com.project.gamestore.entities.UserGame;
 import com.project.gamestore.repositories.GameRepository;
 import com.project.gamestore.repositories.UserRepository;
 
+import lombok.AllArgsConstructor;
+
 @Component
+@AllArgsConstructor
 public class UserGameMapper {
 
-    @Autowired
     private GameRepository gameRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
     public UserGameDTO mapEntityToDTO(UserGame userGame) {

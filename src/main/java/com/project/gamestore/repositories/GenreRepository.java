@@ -1,7 +1,7 @@
 package com.project.gamestore.repositories;
+
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-
 import com.project.gamestore.entities.Genre;
 
 @Repository
