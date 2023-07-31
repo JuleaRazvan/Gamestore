@@ -164,4 +164,33 @@
          </column>
       </createTable>
    </changeSet>
+
+   <changeSet id="gs-12.1" author="rjulea">
+      <createTable tableName="transactions">
+         <column name="id" type="bigint" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false" uniqueConstraintName="transactions_pk"/>
+         </column>
+         <column name="public_identifier" type="${uuid.type}">
+            <constraints nullable="false" unique="true" uniqueConstraintName="transactions_public_identifier_uk"/>
+         </column>
+         <column name="created_at" type="${timestamp.type}">
+            <constraints nullable="false"/>
+         </column>
+         <column name="last_updated_at" type="${timestamp.type}">
+            <constraints nullable="false"/>
+         </column>  
+         <column name="price" type="decimal(5,2)">
+            <constraints nullable="false"/>
+         </column> 
+         <column name="type" type="varchar(50)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="user_id" type="bigint">
+            <constraints nullable="false" references="users(id)" foreignKeyName="transactions_user_id_fk"/>
+         </column>
+         <column name="game_id" type="bigint">
+            <constraints nullable="false" references="games(id)" foreignKeyName="transactions_game_id_fk"/>
+         </column>
+      </createTable>
+   </changeSet>
 </databaseChangeLog>

@@ -11,7 +11,7 @@ public class Routes {
     public static final String GAMES_ENTRY = GAMES_ROOT + "/{publicIdentifier}";
     public static final String GAMES_ENTRY_USERS_ENTRY = GAMES_ENTRY + "/users/{userIdentifier}";
     public static final String GAMES_BUY = GAMES_ENTRY_USERS_ENTRY + "/buy";
-    public static final String GAMES_REFUND = GAMES_ENTRY_USERS_ENTRY +"/refund";
+    public static final String GAMES_REFUND = GAMES_ENTRY_USERS_ENTRY + "/refund";
 
     public static final String GENRES_ROOT = API_ROOT + "/genres";
     public static final String GENRES_ENTRY = GENRES_ROOT + "/{publicIdentifier}";
@@ -26,4 +26,6 @@ public class Routes {
     public static final String USER_GAMES_ROOT = API_ROOT + "/user_game";
     public static final String USER_GAMES_ENTRY = USER_GAMES_ROOT + "/{publicIdentifier}";
 
+    public static final String TRANSACTION_ROOT = API_ROOT + "/transactions";
+    public static final String TRANSACTION_ENTRY = TRANSACTION_ROOT + "/{publicIdentifier}";
 }
