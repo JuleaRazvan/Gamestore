@@ -14,9 +14,11 @@ import com.project.gamestore.repositories.TransactionRepository;
 import com.project.gamestore.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class TransactionService {
 
     private TransactionMapper transactionMapper;
@@ -30,6 +32,7 @@ public class TransactionService {
     public TransactionDTO create(TransactionApi transactionApi) {
         Transaction transaction = transactionMapper.mapApiToEntity(transactionApi);
         Transaction createdTransaction = transactionRepository.save(transaction);
+        log.info("Created transaction entity with public identifier {}", transaction.getPublicIdentifier());
         return transactionMapper.mapEntityToDTO(createdTransaction);
     }
 
@@ -56,11 +59,13 @@ public class TransactionService {
         updateTransaction.setGame(game);
         updateTransaction = transactionRepository.save(updateTransaction);
 
+        log.info("Updated transaction with public identifier {}", updateTransaction.getPublicIdentifier());
         return transactionMapper.mapEntityToDTO(updateTransaction);
     }
 
     @Transactional
     public void delete(UUID publicIdentifier) {
         transactionRepository.deleteByPublicIdentifier(publicIdentifier);
+        log.info("Deleted transaction with public identifier {}", publicIdentifier);
     }
 }

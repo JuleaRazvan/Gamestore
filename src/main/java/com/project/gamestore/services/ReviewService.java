@@ -14,9 +14,11 @@ import com.project.gamestore.repositories.ReviewRepository;
 import com.project.gamestore.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ReviewService {
 
     private ReviewMapper reviewMapper;
@@ -30,6 +32,7 @@ public class ReviewService {
     public ReviewDTO createReview(ReviewApi reviewApi) {
         Review review = reviewMapper.mapApiToEntity(reviewApi);
         Review createdReview = reviewRepository.save(review);
+        log.info("Created review entity with public identifier {}", createdReview.getPublicIdentifier());
         return reviewMapper.mapEntityToDTO(createdReview);
     }
 
@@ -56,11 +59,13 @@ public class ReviewService {
         updateReview.setGame(game);
         updateReview = reviewRepository.save(updateReview);
 
+        log.info("Updated review with public identifier {}", updateReview.getPublicIdentifier());
         return reviewMapper.mapEntityToDTO(updateReview);
     }
 
     @Transactional
     public void delte(UUID publicIdentifier) {
         reviewRepository.deleteByPublicIdentifier(publicIdentifier);
+        log.info("Deleted review with public identifier {}", publicIdentifier);
     }
 }

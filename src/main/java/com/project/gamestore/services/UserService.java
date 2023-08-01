@@ -2,7 +2,6 @@ package com.project.gamestore.services;
 
 import java.util.*;
 import org.springframework.stereotype.Service;
-
 import com.project.gamestore.dtos.GameDTO;
 import com.project.gamestore.dtos.UserDTO;
 import com.project.gamestore.entities.User;
@@ -12,9 +11,11 @@ import com.project.gamestore.repositories.UserGameRepository;
 import com.project.gamestore.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
 
     private UserRepository userRepository;
@@ -28,6 +29,7 @@ public class UserService {
     public UserDTO createUser(UserDTO userDTO) {
         User user = userMapper.mapDtoToEntity(userDTO);
         User createdUser = userRepository.save(user);
+        log.info("Created user entity with public identifier {}", createdUser.getPublicIdentifier());
         return userMapper.mapEntityToDTO(createdUser);
     }
 
@@ -50,18 +52,19 @@ public class UserService {
     }
 
     public UserDTO update(UserDTO userUpdate, UUID publicIdentifier) {
-        User user = userRepository.findByPublicIdentifierMandatory(publicIdentifier);
-        user.setName(userUpdate.getName());
-        user.setEmail(userUpdate.getEmail());
-        user.setRole(userUpdate.getRole());
-        user = userRepository.save(user);
+        User updateUser = userRepository.findByPublicIdentifierMandatory(publicIdentifier);
+        updateUser.setName(userUpdate.getName());
+        updateUser.setEmail(userUpdate.getEmail());
+        updateUser.setRole(userUpdate.getRole());
+        updateUser = userRepository.save(updateUser);
 
-        return userMapper.mapEntityToDTO(user);
+        log.info("Updated user with public identifier {}", updateUser.getPublicIdentifier());
+        return userMapper.mapEntityToDTO(updateUser);
     }
 
     @Transactional
     public void delete(UUID publicIdentifier) {
         userRepository.deleteByPublicIdentifier(publicIdentifier);
+        log.info("Deleted user with public identifier {}", publicIdentifier);
     }
-
 }

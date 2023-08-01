@@ -9,9 +9,11 @@ import com.project.gamestore.mappers.GenreMapper;
 import com.project.gamestore.repositories.GenreRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class GenreService {
 
     private GenreRepository genreRepository;
@@ -21,6 +23,7 @@ public class GenreService {
     public GenreDTO createGenre(GenreDTO genreDTO) {
         Genre genre = genreMapper.mapDtoToEntity(genreDTO);
         Genre createdGenre = genreRepository.save(genre);
+        log.info("Created genre entity with public identifier {}", createdGenre.getPublicIdentifier());
         return genreMapper.mapEntityToDTO(createdGenre);
     }
 
@@ -42,12 +45,13 @@ public class GenreService {
         updateGenre.setDescription(genreDTO.getDescription());
         updateGenre = genreRepository.save(updateGenre);
 
+        log.info("Updated genre with public identifier {}", updateGenre.getPublicIdentifier());
         return genreMapper.mapEntityToDTO(updateGenre);
     }
 
     @Transactional
     public void delete(UUID publicIdentifier) {
         genreRepository.deleteByPublicIdentifier(publicIdentifier);
+        log.info("Deleted genre with public identifier {}", publicIdentifier);
     }
-
 }
