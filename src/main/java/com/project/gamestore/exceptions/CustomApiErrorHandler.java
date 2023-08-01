@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
 @ControllerAdvice
+@Slf4j
 public class CustomApiErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ EntityNotFoundException.class })
@@ -17,6 +20,7 @@ public class CustomApiErrorHandler extends ResponseEntityExceptionHandler {
                 .error(exception.getLocalizedMessage())
                 .build();
 
+        log.error(exception.getLocalizedMessage());
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatusCode());
     }
 

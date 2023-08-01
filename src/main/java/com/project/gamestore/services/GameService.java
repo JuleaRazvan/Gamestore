@@ -23,9 +23,11 @@ import com.project.gamestore.repositories.UserGameRepository;
 import com.project.gamestore.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class GameService {
 
     private GameRepository gameRepository;
@@ -47,6 +49,7 @@ public class GameService {
     public GameDTO create(GameApi gameApi) {
         Game game = gameMapper.mapApiToEntity(gameApi);
         Game createdGame = gameRepository.save(game);
+        log.info("Created game entity with public identifier {}", createdGame.getPublicIdentifier());
         return gameMapper.mapEntityToDTO(createdGame);
     }
 
@@ -78,6 +81,9 @@ public class GameService {
                 .game(game)
                 .build();
         transactionRepository.save(transaction);
+        log.info("User with public identifier {} has bought the game with public identifier {}",
+                user.getPublicIdentifier(),
+                game.getPublicIdentifier());
 
         return userGameMapper.mapEntityToDTO(userGame);
     }
@@ -96,6 +102,10 @@ public class GameService {
                 .game(game)
                 .build();
         transactionRepository.save(transaction);
+
+        log.info("User with public identifier {} has refunded the game with public identifier {}",
+                user.getPublicIdentifier(),
+                game.getPublicIdentifier());
     }
 
     public GameDTO update(GameApi gameApi, UUID publicIdentifier) {
@@ -113,11 +123,13 @@ public class GameService {
         updateGame.setPublisher(publisher);
         updateGame = gameRepository.save(updateGame);
 
+        log.info("Updated game with public identifier {}", updateGame.getPublicIdentifier());
         return gameMapper.mapEntityToDTO(updateGame);
     }
 
     @Transactional
     public void delete(UUID publicIdentifier) {
         gameRepository.deleteByPublicIdentifier(publicIdentifier);
+        log.info("Deleted game with public identifier {}", publicIdentifier);
     }
 }
