@@ -1,8 +1,10 @@
 package com.project.gamestore.entities;
 
 import java.math.BigDecimal;
-
+import com.project.gamestore.types.TransactionType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -21,7 +23,9 @@ import lombok.Setter;
 @Table(name = "transactions")
 public class Transaction extends IdentifiableEntity {
     private BigDecimal price;
-    private String type;
+
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -21,6 +21,8 @@ import com.project.gamestore.repositories.PublisherRepository;
 import com.project.gamestore.repositories.TransactionRepository;
 import com.project.gamestore.repositories.UserGameRepository;
 import com.project.gamestore.repositories.UserRepository;
+import com.project.gamestore.types.TransactionType;
+
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +78,7 @@ public class GameService {
 
         Transaction transaction = Transaction.builder()
                 .price(game.getPrice())
-                .type("BUY")
+                .type(TransactionType.BUY)
                 .user(user)
                 .game(game)
                 .build();
@@ -97,7 +99,7 @@ public class GameService {
 
         Transaction transaction = Transaction.builder()
                 .price(game.getPrice())
-                .type("REFUND")
+                .type(TransactionType.REFUND)
                 .user(user)
                 .game(game)
                 .build();
