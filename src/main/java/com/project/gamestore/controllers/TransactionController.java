@@ -21,27 +21,27 @@ public class TransactionController {
 
     private TransactionService transactionService;
 
-    @PostMapping(Routes.TRANSACTION_ROOT)
+    @PostMapping(Routes.TRANSACTIONS_ROOT)
     public TransactionDTO create(@RequestBody TransactionApi transactionApi) {
         return transactionService.create(transactionApi);
     }
 
-    @GetMapping(Routes.TRANSACTION_ROOT)
+    @GetMapping(Routes.TRANSACTIONS_ROOT)
     public List<TransactionDTO> findAll() {
         return transactionService.findAll();
     }
 
-    @GetMapping(Routes.TRANSACTION_ENTRY)
+    @GetMapping(Routes.TRANSACTIONS_ENTRY)
     public TransactionDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier) {
         return transactionService.getByPublicIdentifier(publicIdentifier);
     }
 
-    @PutMapping(Routes.TRANSACTION_ENTRY)
+    @PutMapping(Routes.TRANSACTIONS_ENTRY)
     public TransactionDTO update(@RequestBody TransactionApi transactionApi, @PathVariable UUID publicIdentifier) {
         return transactionService.update(transactionApi, publicIdentifier);
     }
 
-    @DeleteMapping(Routes.TRANSACTION_ENTRY)
+    @DeleteMapping(Routes.TRANSACTIONS_ENTRY)
     public void delete(@PathVariable UUID publicIdentifier) {
         transactionService.delete(publicIdentifier);
     }

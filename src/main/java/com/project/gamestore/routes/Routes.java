@@ -23,9 +23,9 @@ public class Routes {
     public static final String REVIEWS_ROOT = API_ROOT + "/reviews";
     public static final String REVIEWS_ENTRY = REVIEWS_ROOT + "/{publicIdentifier}";
 
-    public static final String USER_GAMES_ROOT = API_ROOT + "/user_game";
-    public static final String USER_GAMES_ENTRY = USER_GAMES_ROOT + "/{publicIdentifier}";
+    public static final String USERS_GAMES_ROOT = API_ROOT + "/user_game";
+    public static final String USERS_GAMES_ENTRY = USERS_GAMES_ROOT + "/{publicIdentifier}";
 
-    public static final String TRANSACTION_ROOT = API_ROOT + "/transactions";
-    public static final String TRANSACTION_ENTRY = TRANSACTION_ROOT + "/{publicIdentifier}";
+    public static final String TRANSACTIONS_ROOT = API_ROOT + "/transactions";
+    public static final String TRANSACTIONS_ENTRY = TRANSACTIONS_ROOT + "/{publicIdentifier}";
 }
