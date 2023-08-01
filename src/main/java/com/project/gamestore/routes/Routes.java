@@ -28,4 +28,7 @@ public class Routes {
 
     public static final String TRANSACTIONS_ROOT = API_ROOT + "/transactions";
     public static final String TRANSACTIONS_ENTRY = TRANSACTIONS_ROOT + "/{publicIdentifier}";
+
+    public static final String STATEMENTS_ROOT = API_ROOT + "/statements";
+    public static final String STATEMENTS_DAILY = STATEMENTS_ROOT + "/daily-statement";
 }
