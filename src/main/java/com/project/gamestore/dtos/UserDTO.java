@@ -1,7 +1,8 @@
 package com.project.gamestore.dtos;
+
 import java.time.Instant;
 import java.util.UUID;
-
+import com.project.gamestore.types.UserRoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class UserDTO {
     private UUID publicIdentifier;
     private String name;
     private String email;
-    private String role;
+    private UserRoleType role;
     private Instant createdAt;
     private Instant lastUpdatedAt;
 }
