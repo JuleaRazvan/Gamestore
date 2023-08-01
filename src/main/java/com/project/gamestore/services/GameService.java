@@ -103,7 +103,7 @@ public class GameService {
                 .build();
         transactionRepository.save(transaction);
 
-        log.info("User with public identifier {} has refunded the  game with public identifier {}",
+        log.info("User with public identifier {} has refunded the game with public identifier {}",
                 user.getPublicIdentifier(),
                 game.getPublicIdentifier());
     }
