@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
-public class StatmentGenerator {
+public class StatementGenerator {
 
         private TransactionRepository transactionRepository;
 
