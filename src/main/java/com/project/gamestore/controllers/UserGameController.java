@@ -22,27 +22,27 @@ public class UserGameController {
 
     private UserGameService userGameService;
 
-    @PostMapping(Routes.USER_GAMES_ROOT)
+    @PostMapping(Routes.USERS_GAMES_ROOT)
     public UserGameDTO create(@RequestBody UserGameDTO userGameDTO) {
         return userGameService.create(userGameDTO);
     }
 
-    @GetMapping(Routes.USER_GAMES_ROOT)
+    @GetMapping(Routes.USERS_GAMES_ROOT)
     public List<UserGameDTO> findAll() {
         return userGameService.findAll();
     }
 
-    @GetMapping(Routes.USER_GAMES_ENTRY)
+    @GetMapping(Routes.USERS_GAMES_ENTRY)
     public UserGameDTO findByPublicIdentifier(@PathVariable UUID publicIdentifier) {
         return userGameService.getByPublicIdentifier(publicIdentifier);
     }
 
-    @PutMapping(Routes.USER_GAMES_ENTRY)
+    @PutMapping(Routes.USERS_GAMES_ENTRY)
     public UserGameDTO update(@RequestBody UserGameDTO userGameDTO, @PathVariable UUID publicIdentifier) {
         return userGameService.update(userGameDTO, publicIdentifier);
     }
 
-    @DeleteMapping(Routes.USER_GAMES_ENTRY)
+    @DeleteMapping(Routes.USERS_GAMES_ENTRY)
     public void delete(@PathVariable UUID publicIdentifier) {
         userGameService.delete(publicIdentifier);
     }

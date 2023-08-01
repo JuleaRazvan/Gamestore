@@ -10,6 +10,7 @@ import com.project.gamestore.dtos.UserGameDTO;
 import com.project.gamestore.entities.Game;
 import com.project.gamestore.entities.Genre;
 import com.project.gamestore.entities.Publisher;
+import com.project.gamestore.entities.Transaction;
 import com.project.gamestore.entities.User;
 import com.project.gamestore.entities.UserGame;
 import com.project.gamestore.mappers.GameMapper;
@@ -17,9 +18,9 @@ import com.project.gamestore.mappers.UserGameMapper;
 import com.project.gamestore.repositories.GameRepository;
 import com.project.gamestore.repositories.GenreRepository;
 import com.project.gamestore.repositories.PublisherRepository;
+import com.project.gamestore.repositories.TransactionRepository;
 import com.project.gamestore.repositories.UserGameRepository;
 import com.project.gamestore.repositories.UserRepository;
-
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -37,9 +38,11 @@ public class GameService {
 
     private UserRepository userRepository;
 
-    public UserGameRepository userGameRepository;
+    private UserGameRepository userGameRepository;
 
-    public UserGameMapper userGameMapper;
+    private UserGameMapper userGameMapper;
+
+    private TransactionRepository transactionRepository;
 
     public GameDTO create(GameApi gameApi) {
         Game game = gameMapper.mapApiToEntity(gameApi);
@@ -61,18 +64,38 @@ public class GameService {
     public UserGameDTO buyGame(UUID publicIdentifier, UUID userIdentifier) {
         User user = userRepository.findByPublicIdentifierMandatory(userIdentifier);
         Game game = gameRepository.findByPublicIdentifierMandatory(publicIdentifier);
+
         UserGame userGame = UserGame.builder()
                 .user(user)
                 .game(game)
                 .build();
         userGameRepository.save(userGame);
 
+        Transaction transaction = Transaction.builder()
+                .price(game.getPrice())
+                .type("BUY")
+                .user(user)
+                .game(game)
+                .build();
+        transactionRepository.save(transaction);
+
         return userGameMapper.mapEntityToDTO(userGame);
     }
 
     @Transactional
-    public void refundGame(UUID gameIdentifier, UUID userIdentifier){
+    public void refundGame(UUID gameIdentifier, UUID userIdentifier) {
         userGameRepository.deleteByUser_PublicIdentifierAndGame_PublicIdentifier(userIdentifier, gameIdentifier);
+
+        User user = userRepository.findByPublicIdentifierMandatory(userIdentifier);
+        Game game = gameRepository.findByPublicIdentifierMandatory(gameIdentifier);
+
+        Transaction transaction = Transaction.builder()
+                .price(game.getPrice())
+                .type("REFUND")
+                .user(user)
+                .game(game)
+                .build();
+        transactionRepository.save(transaction);
     }
 
     public GameDTO update(GameApi gameApi, UUID publicIdentifier) {
